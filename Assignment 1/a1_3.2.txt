@@ -1,0 +1,11 @@
+1000: 0.3260
+5000: 0.3714
+10000: 0.3731
+15000: 0.3811
+20000: 0.3936
+
+The expected trend was that as the dataset gets bigger, the accuracy in the model predictions
+also improve. This is because the more data we have, the more patterns that can be realised 
+between different political stances. This was found to be true as the accuracy improves steadily
+as the amount of training data increased. The accuracy went from 32.6% at 1000 data points to 
+39.2% with 20000 data points for training.

@@ -1,0 +1,55 @@
+Results for SDGClassifier:
+	Accuracy: 0.3279
+	Recall: [1.2998, 1.3563, 1.3207, 1.2721]
+	Precision: [3.1041, 1.6004, 0.5417, 3.8917]
+	Confusion Matrix: 
+[[ 309  406 1113  190]
+ [ 151  667  984  132]
+ [ 163  232 1443  148]
+ [ 222  334 1302  204]]
+
+Results for GaussianNB:
+	Accuracy: 0.3145
+	Recall: [1.2468, 1.3009, 1.2669, 1.2202]
+	Precision: [0.4932, 12.2136, 1.1708, 4.625]
+	Confusion Matrix: 
+[[1480   13  402  123]
+ [1226  119  470  119]
+ [1026   47  764  149]
+ [1369   27  513  153]]
+
+Results for RandomForestClassifier:
+	Accuracy: 0.3730
+	Recall: [1.4787, 1.5429, 1.5025, 1.4471]
+	Precision: [1.0582, 6.1399, 1.1575, 1.4102]
+	Confusion Matrix: 
+[[1004    8  515  491]
+ [ 709  315  399  511]
+ [ 403  120 1007  456]
+ [ 704   43  657  658]]
+
+Results for MLPCLassifier:
+	Accuracy: 0.3704
+	Recall: [1.4683, 1.5321, 1.4919, 1.437]
+	Precision: [1.8156, 0.7816, 2.4754, 2.1471]
+	Confusion Matrix: 
+[[ 640  851  205  322]
+ [ 288 1258  160  228]
+ [ 303  756  581  346]
+ [ 401  926  251  484]]
+
+Results for AdaBoostClassifier:
+	Accuracy: 0.3966
+	Recall: [1.5723, 1.6406, 1.5977, 1.5388]
+	Precision: [1.1232, 2.0739, 1.4127, 2.268]
+	Confusion Matrix: 
+[[1061  252  418  287]
+ [ 579  686  360  309]
+ [ 472  289  924  301]
+ [ 713  303  544  502]]
+
+The AdaBoostClassifier did the best in training accuracy. This is one of the more recent algorithms 
+from the set chosen. The better preformance may be a testament to improving on technology through time.
+"We stand on the shoulders of giants" is a quote by isaac newton indicating that in order to make progress
+on science and technology, we have always used the understandings and learning gained by major thinkers 
+of the past.
