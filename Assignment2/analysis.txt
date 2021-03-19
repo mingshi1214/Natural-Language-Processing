@@ -1,0 +1,134 @@
+CSC401 Assignment 2 Analysis
+Student id: 1004881096
+	    chimings
+_______________________________________________________________
+TRAINING WITHOUT ATTENTION
+----
+EPOCH 1:
+	train time: 161s
+	average blue calculation time: 24s
+	loss: 3.41045
+	BLUE: 0.23795
+
+EPOCH 2:
+	train time: 163s
+	average blue calculation time: 25s
+	loss: 2.44665
+	BLUE: 0.26571
+
+EPOCH 3:
+	train time: 163s
+	average blue calculation time: 24s
+	loss: 1.98149
+	BLUE: 0.27930
+
+EPOCH 4:
+	train time: 163s
+	average blue calculation time: 24s
+	loss: 1.63105
+	BLUE: 0.28880
+
+EPOCH 5:
+	train time: 163s
+	average blue calculation time: 24s
+	loss: 1.36071
+	BLUE: 0.29450
+________________________________________________________________
+TRAINING WITH SINGLE HEAD ATTENTION
+----
+EPOCH 1:
+	train time: 212s
+	average blue calculation time: 29s
+	loss: 3.18804
+	BLUE: 0.27718
+
+EPOCH 2:
+	train time: 213s
+	average blue calculation time: 29s
+	loss: 2.13580
+	BLUE: 0.30575
+
+EPOCH 3:
+	train time: 214s
+	average blue calculation time: 29s
+	loss: 1.66810
+	BLUE: 0.31509
+
+EPOCH 4:
+	train time: 214s
+	average blue calculation time: 30s
+	loss: 1.33685
+	BLUE: 0.32381
+
+EPOCH 5:
+	train time: 213s
+	average blue calculation time: 29s
+	loss: 1.09578
+	BLUE: 0.32484
+________________________________________________________________
+TRAINING WITH MULTI HEAD ATTENTION
+----
+EPOCH 1:
+	train time: 269s
+	average blue calculation time: 36s
+	loss: 3.15885
+	BLUE: 0.27542
+
+EPOCH 2:
+	train time: 271s
+	average blue calculation time: 37s
+	loss: 2.16270
+	BLUE: 0.30384
+
+EPOCH 3:
+	train time: 271s
+	average blue calculation time: 36s
+	loss: 1.75336
+	BLUE: 0.31508
+
+EPOCH 4:
+	train time: 271s
+	average blue calculation time: 36s
+	loss: 1.46911
+	BLUE: 0.32155
+
+EPOCH 5:
+	train time: 271s
+	average blue calculation time: 36s
+	loss: 1.26178
+	BLUE: 0.32432
+________________________________________________________________
+TESTING MODELS:
+----
+TEST WITHOUT ATTENTION BLEU: 0.32950
+
+TEST WITH SINGLE-HEADED ATTENTION BLEU: 0.36717
+
+TEST WITH MULTI-HEADED ATTENTION BLEU: 0.36992
+_________________________________________________________________
+DISCUSSION:
+----
+I found that with no attention the preformance was lower after 5 epochs with a higher loss.
+With multihead attention did similar to single-headed attention during training and out preformed
+no attention in training having an end loss of 1.26178 and an average BLEU score
+of 0.32432.
+
+This is to be expected as multiheaded attention allows the model to jointly attent to information
+from different representations of subspaces at different position. With just one head or no attention,
+it does not allow for this. However, it was expected that with multihead attention would preform better 
+than single head attention in training. With multihead attention only had a difference of 0.0005 from
+the best training result which was With Single-head Attention. This slight discrepancy can be ignored as 
+during testing, it was proven that multiheaded attention preforms better.
+
+With attention models do better than without. This preformance is to be expected as it uses a better
+selection of prior words to consider at the current time step. With attention models use a better context
+by considering it over a longer sequence and by looking at the sequence holistically to understand it's meaning.
+
+Testing results overall had a higher average bleu score than the final epoch bleu scores for all models.
+This may be due to having different data in the Test sample. Due to having a different set to the train data,
+this causes the slight discrepancy between final epoch BLEU scores and final test BLEU scores. The difference
+was at most 0.042 which is not too much of a difference to indicate a flaw in the logic of the code.
+
+We expect that the test results would be lower than the train results. Some explinations include: The test set is 
+easier than the train set and have a reduced bias compared to the large train set. The model could be generalizing
+well to the train set and it has not overfit so that the results from the test set were good. 
