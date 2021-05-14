@@ -1,0 +1,90 @@
+Tests without bias
+___________________________________________
+Hidden size 5: 
+Training epoch 8, 7 iterations
+    train loss: 0.663
+    train accuracy: 0.724
+    validation loss: 0.698
+    validation accuracy: 0.348
+
+    test accuracy: 0.258
+____________________________________________
+Hidden size 10:
+Training epoch 8, 7 iterations
+    train loss: 0.708
+    train accuracy: 0.310
+    validation loss: 0.738
+    validation accuracy: 0.269
+
+    test accuracy: 0.355
+____________________________________________
+Hidden size 50:
+Training epoch 8, 7 iterations
+    train loss: 0.691
+    train accuracy: 0.585
+    validation loss: 0.693
+    validation accuracy: 0.587
+
+    test accuracy: 0.581
+____________________________________________
+Hidden size 70:
+Training epoch 8, 7 iterations
+    train loss: 0.705
+    train accuracy: 0.690
+    validation loss: 0.673
+    validation accuracy: 0.731
+
+    test accuracy: 0.645
+____________________________________________
+
+
+
+tests with bias:
+____________________________________________
+Hidden size 5:
+Training epoch 8, 7 iterations
+    train loss: 0.674
+    train accuracy: 0.379
+    validation loss: 0.724
+    validation accuracy: 0.300
+
+    test accuracy: 0.323
+____________________________________________
+Hidden size 10:
+Training epoch 8, 7 iterations
+    train loss: 0.707
+    train accuracy: 0.310
+    validation loss: 0.737
+    validation accuracy: 0.269
+
+    test accuracy: 0.355
+____________________________________________
+Hidden size 50:
+Training epoch 8, 7 iterations
+    train loss: 0.691
+    train accuracy: 0.586
+    validation loss: 0.693
+    validation accuracy: 0.539
+
+    test accuracy: 0.581
+____________________________________________
+Hidden size 70:
+Training epoch 8, 7 iterations
+    train loss: 0.716
+    train accuracy: 0.690
+    validation loss: 0.673
+    validation accuracy: 0.731
+
+    test accuracy: 0.645
+____________________________________________
+
+I tested the GRU model using bias and without bias in the linear layer. As hidden layers increased, the test accuracy grew higher.
+I experimented a bit more with the hidden size and found that best results occured around hidden size 70. 
+A larger hidden size for with and without bias results in a lower test accuracy as the model is underfitting the data.
+
+The low values of test accuracy with smaller hidden sizes is due to the model over fitting the data.
+As you can see, in the test without bias, the train accuracy is significantly higher than the validation accuracy, indicating overfit.
+This makes sense throughout our experiments as we try to avoid overfitting with by increasing the hidden size.
+
+It is generally very hard to detect lies. The final test accuracies are acceptable as this is a hard task to preform using only a GRU.
+

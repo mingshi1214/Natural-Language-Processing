@@ -1,0 +1,75 @@
+For GMM experiments, I varied S, M, epsilon, and the maximum iterations
+
+_______________________________________
+Changing M:
+    I tested M in the range [1, 20].
+
+    If we increase M above the default of 8, the model continues to have an accuracy of 100%.
+    I compared the resulting log likelihoods the final models during testing. 
+    The log likelihoods of each model increases if we increase M. 
+
+    If we decrease M below 8, The accuracy becomes lower than 1 for some values of M. 
+    And the models stops training at iteration 3 when M = 1.
+    The log likelihoods of the models during testing decreases.
+
+    This shows that smaller numbers of gaussians may not be able to generate the data and may not learn
+    some of the features of the task as well. This leads to poorer preformance. A lower capacity would 
+    be assumed to underfit the data slightly. 
+
+________________________________________
+Changing maximum iterations:
+    Increasing the maximum iterations barely changed the results as the M=8, epsilon = 0 already provides 
+    and accuracy of 100%. 
+    However, decreasing the maximum iterations results in undertrained models which lowered the log likelihoods significantly.
+    Accuracy dipped to 0.97 when the maxiumum iterations were changed to 2.
+
+________________________________________
+Changing epsilon
+    increasing epsilon we see worse preformance. This is expected as we undertrain each gaussian mode.
+    This prevents the model to learn some of the variances needed to differentiate different speakers.
+
+________________________________________
+Changing S when unseen data is unallowed
+    Decreasing the number of speakers would mean an esaier task. As we already have 100% accuracy for 
+    the given hyperparameters, I chose to test a lower amount of speakers with worse hyper parameters as 
+    found in the previous experiments when 32 speaker does not give 100% accuracy.
+    When we decrease the number of speakers in this case, the accuracy increases.
+    Around 13 speakers is when the accuracy is 100% and the accuracy decreases to around 95% at 20ish speakers.
+
+Changing S when unseen data is allowed
+    Decreasing the number of seen speakers when training lowers the accuracy significantly. This shows that the model 
+    is can identify its own speakers perfectly bit does not do well when there are other speakers in the test set as 
+    the model would choose the highest likelihood using argmax() which would result in an incorrect speaker.
+    This is explored more in the hypothetical answers below.
+_________________________________________
+Hypothetical answers:
+
+    to improve the accuracy of the gaussian mixtures without adding more training data we can do a more indepth
+    and rigorous hyper parameter search with documented experiments and comparisions. 
+    Hyperparameters as shown above are crucial to the prefomance of the gaussian mixtures. Fine tuning these
+    hyperparameters can improve the classification accuracy.
+    As we have seen, we can increase M and tune through experimenting, and increase the max iteration to get better results.
+    Epsilon should remain 0.0.
+    We can also experiment with initializing the parameters differently (mu, sigma, omega). When debugging, I noticed that different
+    initialization significantly affects the convergence and accuracy of the training and test. With proper experimentation, perhaps 
+    a best initialization method can be found.
+    We can split the data into training, validation, and test sets to find our best hyperparameters.
+    During training we can also use a more modern approach such as k-fold cross validation to account for noise in data.
+    
+    My classifier model would never decide that the speaker does not come from the trained speakers.
+    This is due to using argmax. The classifier would choose the speaker that is most similar to the test utterance even if
+    The likelihood is very very low. To make a model for production and so that the test utterance can be sampled outside of the 
+    output space of the training distrution, and so the classifier would decide that the test utterance comes from none of the trained speaker,
+    we should implement a threshold on the log likeligood to determine if the data is from any of the trained speakers.
+    This would require collecting new samples to determine a good threshold for this implimentation.
+    
+    An alternative could be K-means clustering. Run the k-means on the utterance data to find the approximate k-cluster centers for k speakers.
+    When fiven a new speaker, find the closest cluster to the speaker.
+    This may not work as well as the current method as this is a relatively simple method and each speaker can be approximated quite well with a M=1
+    GMM model already.
+    Another alternative could be using an LSTM on each speaker and find the cosine distance of the hidden states of all the speakers vs the new 
+    speaker using some threshold.
+    This is a common method for accoustic speech verification. This model can work well as we can also evaluate out of set data easily.
+    We can also use PCA ala eigenfaces to reduce dimensions for a better separation of data cluster points. However, if the clusters of different
+    speakers are too tightly intertwined and overlapped, this may not work as well as the dimention reduction would not preduce a good separation of points.
+    
